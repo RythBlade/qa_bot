@@ -1,4 +1,6 @@
-#include "usb_keyboard.h"
+#include "platform_defines.h"
+
+//#include "usb_keyboard.h"
 
 // constants won't change. They're used here to
 // set pin numbers:
@@ -9,12 +11,20 @@ const int buttonPinTwo = 4;     // the number of the pushbutton pin
 int buttonStateOne = 0;         // variable for reading the pushbutton status
 int buttonStateTwo = 0;         // variable for reading the pushbutton status
 
+const int ledPin = 13;      // the number of the LED pin
+
 void setup()
 {
-    // setup out monitor channel
-    Serial.begin( 9600 );
+    pinMode( ledPin, OUTPUT );
 
-    UsbKeyboard.begin();
+    // setup out monitor channel
+    SERIAL_BEGIN( 9600 );
+#error "For some reason this baud rate setting macro isn't working!!"
+    //Serial.begin( 9600 );
+
+    SERIAL_PRINT_LINE( "Started the app" );
+
+    //UsbKeyboard.begin();
 
     // initialize the pushbutton pin as an input:
     pinMode( buttonPinOne, INPUT );
@@ -31,11 +41,15 @@ void loop()
     // if it is, the buttonState is HIGH:
     if ( buttonStateOne == HIGH )
     {
-        //Serial.println("Button One: Open");
+        TESTHIGH();
+        //digitalWrite( ledPin, HIGH );
+        //SERIAL_PRINT_LINE("Button One: Open");
     }
     else
     {
-        //Serial.println("Button One: Pressed");
+        TESTLOW();
+        //digitalWrite( ledPin, LOW );
+        //SERIAL_PRINT_LINE("Button One: Pressed");
         //Keyboard.write('A');
 
         /*buf[ 2 ] = 11;
@@ -76,11 +90,11 @@ void loop()
 
     if ( buttonStateTwo == HIGH )
     {
-        //Serial.println("Button Two: Open");
+        //SERIAL_PRINT_LINE("Button Two: Open");
     }
     else
     {
-        //Serial.println("Button Two: Pressed");
+        //SERIAL_PRINT_LINE("Button Two: Pressed");
         //Keyboard.write('B');
     }
 

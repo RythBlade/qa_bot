@@ -3,16 +3,17 @@
 #ifndef _BUTTONSENDER_h
 #define _BUTTONSENDER_h
 
+#include "platform_defines.h"
+
+#ifdef PLATFORM_ARDUINO
+
 #if defined(ARDUINO) && ARDUINO >= 100
 #include "arduino.h"
 #else
 #include "WProgram.h"
 #endif
 
-enum ButtonSenderKeys
-{
-
-};
+#endif
 
 //! @brief      Sends keystrokes to an attached computer;
 //! @remarks    THIS IS A 1 TO 1 IMPLEMENTATION OF THE ARDUINO KEYBOARD LIBRARY FOR ARDUINO UNO R3 WHICH HAVE HAD THEIR BOOT LOADER ALTERED TO APPEAR AS USB DEVICE
@@ -60,7 +61,7 @@ public:
     //! @remarks    Keyboard.print() must be called after initiating Keyboard.begin(). 
     //!             WARNING: When you use the Keyboard.print() command, the Arduino takes over your keyboard!
     //!             Make sure you have control before you use the command. A pushbutton to toggle the keyboard control state is effective.
-    //! @retruns    Number of bytes sent
+    //! @returns    Number of bytes sent
     int print( char* stringToPrint );
 
     //! @brief      Sends a keystroke to a connected computer, followed by a newline and carriage return.
@@ -68,7 +69,7 @@ public:
     //! @remarks    Keyboard.print() must be called after initiating Keyboard.begin(). 
     //!             WARNING: When you use the Keyboard.print() command, the Arduino takes over your keyboard!
     //!             Make sure you have control before you use the command. A pushbutton to toggle the keyboard control state is effective.
-    //! @retruns    Number of bytes sent
+    //! @returns    Number of bytes sent
     int println( char charaterToPrint );
 
     //! @brief      Sends a keystroke to a connected computer, followed by a newline and carriage return.
